@@ -684,14 +684,18 @@ int getCost(int cardNumber)
 // Baron
 int cardBaron(int currentPlayer, struct gameState *state, int handPos, int choice1)
 {
+
     state->numBuys++;//Increase buys by 1!
-    printf("Baron used\n");
+
     if (choice1 > 0) { //Boolean true or going to discard an estate
-        int p = 0;//Iterator for hand!
-        int card_not_discarded = 1;//Flag for discard set!
+
+        int p = 0; // Iterator for hand!
+        int card_not_discarded = 1; // Flag for discard set!
+        
         while(card_not_discarded) {
+
             if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
-                state->coins += 4;//Add 4 coins to the amount of coins
+                state->coins += 4; // Add 4 coins to the amount of coins
                 state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
                 state->discardCount[currentPlayer]++;
                 for (; p < state->handCount[currentPlayer]; p++) {
@@ -710,9 +714,7 @@ int cardBaron(int currentPlayer, struct gameState *state, int handPos, int choic
                     gainCard(estate, state, 0, currentPlayer);
 
                     state->supplyCount[estate]--;//Decrement estates
-                    if (supplyCount(estate, state) == 0) {
-                        isGameOver(state);
-                    }
+                    if (supplyCount(estate, state) == 0) { isGameOver(state); }
                 }
                 card_not_discarded = 0;//Exit the loop
             }
@@ -722,15 +724,12 @@ int cardBaron(int currentPlayer, struct gameState *state, int handPos, int choic
             }
         }
     }
-
         else {
         if (supplyCount(estate, state) > 0) {
             gainCard(estate, state, 0, currentPlayer);//Gain an estate
 
             state->supplyCount[estate]--;//Decrement Estates
-            if (supplyCount(estate, state) == 0) {
-                isGameOver(state);
-            }
+            if (supplyCount(estate, state) == 0) { isGameOver(state); }
         }
     }
 
@@ -896,12 +895,11 @@ int cardTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, st
 
             shuffle(nextPlayer,state);//Shuffle the deck
         }
-        tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-        state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
-        state->deckCount[nextPlayer]--;
-        tributeRevealedCards[1] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-        state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
-        state->deckCount[nextPlayer]--;
+        for (i = 0; i <= 1; i ++) {
+            tributeRevealedCards[i] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
+            state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
+            state->deckCount[nextPlayer]--;        
+        }
     }
 
     if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
@@ -911,6 +909,7 @@ int cardTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, st
     }
 
     for (i = 0; i <= 2; i ++) {
+
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 2;
         }
