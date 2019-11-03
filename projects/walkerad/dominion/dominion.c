@@ -700,11 +700,15 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         nextPlayer = 0;
     }
 
+    printf("IN CARD EFFECT\n");
+    printf("The integer is: %d\n", card);
+    printf("Current player is: %d\n", currentPlayer);
 
     //uses switch to select card and perform actions
     switch( card )
     {
     case adventurer:
+        printf("HERE");
         while(drawntreasure<2) {
             if (state->deckCount[currentPlayer] <1) { //if the deck is empty we need to shuffle discard and add to deck
                 shuffle(currentPlayer, state);
@@ -750,6 +754,9 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case feast:
+
+        printf("IN FEAST\n");
+
         //gain card with cost up to 5
         //Backup hand
         for (i = 0; i <= state->handCount[currentPlayer]; i++) {
@@ -806,6 +813,9 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return -1;
 
     case mine:
+
+        printf("playing Mine\n");
+
         j = state->hand[currentPlayer][choice1];  //store card we will trash
 
         if (state->hand[currentPlayer][choice1] < copper || state->hand[currentPlayer][choice1] > gold)
@@ -889,6 +899,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case baron:
+        printf("FOUND BARON\n");
         state->numBuys++;//Increase buys by 1!
         if (choice1 > 0) { //Boolean true or going to discard an estate
             int p = 0;//Iterator for hand!
@@ -938,6 +949,9 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
             }
         }
 
+        // Discard baron card
+        printf("Discarding card\n");
+        // discardCard(handPos, currentPlayer, state, 0);
 
         return 0;
 
