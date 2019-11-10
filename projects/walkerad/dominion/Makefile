@@ -10,9 +10,6 @@ playdom: dominion.o playdom.c
 	gcc -o playdom playdom.c -g dominion.o rngs.o $(CFLAGS)
 #To run playdom you need to entere: ./playdom <any integer number> like ./playdom 10*/
 
-dominion_test: dominion.o dominion_test.c
-	gcc -o dominion_test dominion_test.c -g dominion.o rngs.o  $(CFLAGS)
-
 testDrawCard: testDrawCard.c dominion.o rngs.o
 	gcc  -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
 
@@ -27,30 +24,32 @@ runtests: testDrawCard
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
-unittestresults: playdom player unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c
-	
-	echo "unittest1.c:" >> unittestresults.out
-	gcc -o unittest1 unittest1.c $(CFLAGS)
+unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c dominion.o rngs.o
+
+	echo "unittest1.c:" > unittestresults.out
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)
+	./unittest1 >> unittestresults.out
 	
 	echo "unittest2.c:" >> unittestresults.out
-	gcc -o unittest2 unittest2.c $(CFLAGS)
+	gcc -o unittest2 -g unittest2.c dominion.o rngs.o $(CFLAGS)
 	./unittest2 >> unittestresults.out
 	
 	echo "unittest3.c:" >> unittestresults.out
-	gcc -o unittest3 unittest3.c $(CFLAGS)
+	gcc -o unittest3 -g unittest3.c dominion.o rngs.o $(CFLAGS)
 	./unittest3 >> unittestresults.out
 	
 	echo "unittest4.c:" >> unittestresults.out
-	gcc -o unittest4 unittest4.c $(CFLAGS)
+	gcc -o unittest4 -g unittest4.c dominion.o rngs.o $(CFLAGS)
 	./unittest4 >> unittestresults.out
 	
 	echo "unittest5.c:" >> unittestresults.out
-	gcc -o unittest5 unittest5.c $(CFLAGS)
+	gcc -o unittest5 -g unittest5.c dominion.o rngs.o $(CFLAGS)
 	./unittest5 >> unittestresults.out
-	
+		
 	gcov -b -f dominion.c >> unittestresults.out
+	# cat dominion.c.gcov >> unittestresults.out
 
-all: playdom player dominion_test
+all: playdom player
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe unittest1 unittest2 unittest3 unittest4 unittest5 playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
