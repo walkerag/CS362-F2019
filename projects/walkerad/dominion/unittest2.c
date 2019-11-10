@@ -73,7 +73,7 @@ void testMinion() {
 
 	endPlayedCards = G.playedCardCount;
 
-	// Check action has been added
+	// Check played cards correct
 	if(startPlayedCards <= (endPlayedCards - 4)){
 		printf("MINION TEST FAILED: too many cards played\n");
 	} else {

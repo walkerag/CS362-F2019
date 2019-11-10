@@ -30,7 +30,7 @@ void testTribute() {
 
 	// Current Player hand
 	G.handCount[0] = 5;
-	G.hand[0][0] = 1; // Add estate card to hand
+	G.hand[0][0] = 1;
 	G.hand[0][1] = 17;
 	G.hand[0][2] = 17;
 	G.hand[0][3] = 20;
@@ -43,7 +43,7 @@ void testTribute() {
 
 	// Next Player hand
 	G.handCount[1] = 5;
-	G.hand[1][0] = 1; // Add estate card to hand
+	G.hand[1][0] = 1;
 	G.hand[1][1] = 1;
 	G.hand[1][2] = 1;
 	G.hand[1][3] = 9; // Action card
@@ -56,7 +56,7 @@ void testTribute() {
 
 	endNumActions = G.numActions;
 
-	// Check 2 coins have been added
+	// Check 4 actions have been added
 	if(startNumActions != (endNumActions - 4)){
 		printf("TRIBUTE TEST FAILED: 4 actions not added\n");
 	} else {
@@ -84,7 +84,7 @@ void testTribute() {
 
 	endNumActions = G.numActions;
 
-	// Check 2 coins have been added
+	// Check 2 actions have been added
 	if(startNumActions != (endNumActions - 2)){
 		printf("TRIBUTE TEST FAILED: 2 actions not added\n");
 	} else {
