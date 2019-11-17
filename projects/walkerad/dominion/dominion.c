@@ -167,6 +167,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
         //initialize hand size to zero
         state->handCount[i] = 0;
         state->discardCount[i] = 0;
+
         //draw 5 cards
         // for (j = 0; j < 5; j++)
         //	{
@@ -883,7 +884,7 @@ int cardTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, st
         for (i = 0; i <= 1; i ++) {
             tributeRevealedCards[i] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
-            state->deckCount[nextPlayer]--;        
+            state->deckCount[nextPlayer]--;
         }
     }
 
