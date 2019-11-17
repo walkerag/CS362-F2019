@@ -55,11 +55,8 @@ int testMinion(int numPlayers) {
 		drawCounter = G.handCount[i];
 	    for ( j = 0; j < drawCounter; j++){
 	    
-	    	// printf("Original card is %d\n", G.hand[i][j]);
-	    	// printf("%d\n", j);
 	    	discardCard(j, i, &G, 0);
 	    	drawCard(i, &G);
-	    	// printf("Drawn card is %d\n", G.hand[i][j]);
 	    
 	    }
 
@@ -67,7 +64,6 @@ int testMinion(int numPlayers) {
 
 	// Draw 1 or 2 for choice
 	int choice = (rand() % 2) + 1;
-	// printf("Choice is %d\n", choice);
 
 	// Get starting coin count and number of actions
 	startCoinCount = G.coins;
