@@ -9,6 +9,7 @@
 #include <time.h>
 
 #define MAX_HAND_COUNT 5
+#define MAX_CARD_NUM 26
 
 int testBaron(int numPlayers) {
 
@@ -42,13 +43,7 @@ int testBaron(int numPlayers) {
 		// Redraw each card
 		drawCounter = G.handCount[i];
 	    for ( j = 0; j < drawCounter; j++){
-	    
-	    	// printf("Original card is %d\n", G.hand[i][j]);
-	    	// printf("%d\n", j);
-	    	discardCard(j, i, &G, 0);
-	    	drawCard(i, &G);
-	    	// printf("Drawn card is %d\n", G.hand[i][j]);
-	    
+	    	G.hand[i][j] = (rand() % MAX_CARD_NUM);	    	    
 	    }
 
 	}

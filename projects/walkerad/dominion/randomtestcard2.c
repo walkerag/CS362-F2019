@@ -9,6 +9,7 @@
 #include <time.h>
 
 #define MAX_HAND_COUNT 5
+#define MAX_CARD_NUM 26
 
 int testMinion(int numPlayers) {
 
@@ -54,10 +55,7 @@ int testMinion(int numPlayers) {
 		// Redraw each card
 		drawCounter = G.handCount[i];
 	    for ( j = 0; j < drawCounter; j++){
-	    
-	    	discardCard(j, i, &G, 0);
-	    	drawCard(i, &G);
-	    
+	    	G.hand[i][j] = (rand() % MAX_CARD_NUM);
 	    }
 
 	}
